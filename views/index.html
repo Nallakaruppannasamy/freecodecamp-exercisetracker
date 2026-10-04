@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>FitLog API | Exercise Tracker</title>
+
+  <link
+    rel="stylesheet"
+    href="/public/style.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- NAVBAR -->
+
+  <header class="navbar">
+
+    <div class="brand">
+
+      <div class="logo">
+        FL
+      </div>
+
+      <div>
+        <h1>FitLog</h1>
+        <span>Exercise Tracker API</span>
+      </div>
+
+    </div>
+
+
+    <div class="status">
+
+      <span class="status-dot"></span>
+
+      API ONLINE
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="badge">
+        REST API • FITNESS TRACKER
+      </div>
+
+      <h2>
+        Track your
+        <span>progress.</span>
+      </h2>
+
+      <p>
+        Create users, record workouts and explore
+        exercise history through a simple REST API.
+      </p>
+
+    </section>
+
+
+
+    <!-- DASHBOARD -->
+
+    <section class="dashboard">
+
+
+      <!-- CREATE USER -->
+
+      <div class="card">
+
+        <div class="card-top">
+
+          <span class="number">
+            01
+          </span>
+
+          <span class="method post">
+            POST
+          </span>
+
+        </div>
+
+
+        <h3>
+          Create User
+        </h3>
+
+        <p>
+          Create a new fitness profile and receive
+          a unique user ID.
+        </p>
+
+
+        <form id="userForm">
+
+          <label>
+            Username
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            placeholder="Enter username"
+            required
+          >
+
+
+          <button type="submit">
+            Create User
+            <span>→</span>
+          </button>
+
+        </form>
+
+      </div>
+
+
+
+      <!-- ADD EXERCISE -->
+
+      <div class="card">
+
+        <div class="card-top">
+
+          <span class="number">
+            02
+          </span>
+
+          <span class="method post">
+            POST
+          </span>
+
+        </div>
+
+
+        <h3>
+          Add Exercise
+        </h3>
+
+        <p>
+          Record an exercise for an existing user.
+        </p>
+
+
+        <form id="exerciseForm">
+
+          <label>
+            User ID
+          </label>
+
+          <input
+            id="userId"
+            type="text"
+            placeholder="Enter user ID"
+            required
+          >
+
+
+          <label>
+            Description
+          </label>
+
+          <input
+            id="description"
+            type="text"
+            placeholder="Running, Cycling..."
+            required
+          >
+
+
+          <div class="two-inputs">
+
+            <div>
+
+              <label>
+                Duration
+              </label>
+
+              <input
+                id="duration"
+                type="number"
+                placeholder="60"
+                required
+              >
+
+            </div>
+
+
+            <div>
+
+              <label>
+                Date
+              </label>
+
+              <input
+                id="date"
+                type="date"
+              >
+
+            </div>
+
+          </div>
+
+
+          <button type="submit">
+            Add Exercise
+            <span>→</span>
+          </button>
+
+        </form>
+
+      </div>
+
+
+
+      <!-- VIEW LOG -->
+
+      <div class="card log-card">
+
+        <div class="card-top">
+
+          <span class="number">
+            03
+          </span>
+
+          <span class="method get">
+            GET
+          </span>
+
+        </div>
+
+
+        <h3>
+          View Exercise Log
+        </h3>
+
+        <p>
+          Retrieve a complete exercise history
+          for any user.
+        </p>
+
+
+        <form id="logForm">
+
+          <label>
+            User ID
+          </label>
+
+          <input
+            id="logUserId"
+            type="text"
+            placeholder="Enter user ID"
+            required
+          >
+
+
+          <div class="two-inputs">
+
+            <div>
+
+              <label>
+                From
+              </label>
+
+              <input
+                id="from"
+                type="date"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label>
+                To
+              </label>
+
+              <input
+                id="to"
+                type="date"
+              >
+
+            </div>
+
+          </div>
+
+
+          <label>
+            Limit
+          </label>
+
+          <input
+            id="limit"
+            type="number"
+            placeholder="Optional"
+            min="1"
+          >
+
+
+          <button type="submit">
+            Get Exercise Log
+            <span>→</span>
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- RESPONSE -->
+
+    <section class="response-section">
+
+      <div class="section-heading">
+
+        <span>
+          API RESPONSE
+        </span>
+
+        <h3>
+          Latest result
+        </h3>
+
+      </div>
+
+
+      <div class="response-window">
+
+        <div class="response-header">
+
+          <span>
+            JSON
+          </span>
+
+          <span class="success">
+            READY
+          </span>
+
+        </div>
+
+
+        <pre id="response">{
+  "message": "Submit a request to see the API response."
+}</pre>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- API DOCUMENTATION -->
+
+    <section class="api-section">
+
+      <div class="section-heading">
+
+        <span>
+          API ROUTES
+        </span>
+
+        <h3>
+          Available endpoints
+        </h3>
+
+      </div>
+
+
+      <div class="endpoint">
+
+        <span class="method post">
+          POST
+        </span>
+
+        <code>
+          /api/users
+        </code>
+
+        <span>
+          Create a user
+        </span>
+
+      </div>
+
+
+      <div class="endpoint">
+
+        <span class="method get">
+          GET
+        </span>
+
+        <code>
+          /api/users
+        </code>
+
+        <span>
+          Get all users
+        </span>
+
+      </div>
+
+
+      <div class="endpoint">
+
+        <span class="method post">
+          POST
+        </span>
+
+        <code>
+          /api/users/:_id/exercises
+        </code>
+
+        <span>
+          Add exercise
+        </span>
+
+      </div>
+
+
+      <div class="endpoint">
+
+        <span class="method get">
+          GET
+        </span>
+
+        <code>
+          /api/users/:_id/logs
+        </code>
+
+        <span>
+          Get exercise log
+        </span>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- INFO -->
+
+    <section class="info">
+
+      <div>
+
+        <strong>
+          User
+        </strong>
+
+        <p>
+          Every user receives a unique ID.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Exercise
+        </strong>
+
+        <p>
+          Store description, duration and date.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Logs
+        </strong>
+
+        <p>
+          Filter logs using from, to and limit.
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+
+      <strong>
+        FitLog
+      </strong>
+
+      <span>
+        Exercise Tracker Microservice
+      </span>
+
+    </div>
+
+
+    <div>
+      Built with Node.js & Express
+    </div>
+
+  </footer>
+
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    const responseBox =
+      document.getElementById("response");
+
+
+    // ----------------------------
+    // Display response
+    // ----------------------------
+
+    function showResponse(data) {
+
+      responseBox.textContent =
+        JSON.stringify(data, null, 2);
+
+    }
+
+
+    // ----------------------------
+    // Create User
+    // ----------------------------
+
+    document
+      .getElementById("userForm")
+      .addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const username =
+          document.getElementById("username").value;
+
+
+        const formData =
+          new URLSearchParams();
+
+        formData.append(
+          "username",
+          username
+        );
+
+
+        try {
+
+          const result =
+            await fetch("/api/users", {
+
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/x-www-form-urlencoded"
+              },
+
+              body: formData
+
+            });
+
+
+          const data =
+            await result.json();
+
+          showResponse(data);
+
+        } catch (error) {
+
+          showResponse({
+            error: "Unable to connect to API"
+          });
+
+        }
+
+      });
+
+
+
+    // ----------------------------
+    // Add Exercise
+    // ----------------------------
+
+    document
+      .getElementById("exerciseForm")
+      .addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+
+        const userId =
+          document.getElementById("userId").value;
+
+        const description =
+          document.getElementById("description").value;
+
+        const duration =
+          document.getElementById("duration").value;
+
+        const date =
+          document.getElementById("date").value;
+
+
+        const formData =
+          new URLSearchParams();
+
+
+        formData.append(
+          "description",
+          description
+        );
+
+        formData.append(
+          "duration",
+          duration
+        );
+
+
+        if (date) {
+
+          formData.append(
+            "date",
+            date
+          );
+
+        }
+
+
+        try {
+
+          const result =
+            await fetch(
+              `/api/users/${userId}/exercises`,
+              {
+
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/x-www-form-urlencoded"
+                },
+
+                body: formData
+
+              }
+            );
+
+
+          const data =
+            await result.json();
+
+          showResponse(data);
+
+        } catch (error) {
+
+          showResponse({
+            error: "Unable to connect to API"
+          });
+
+        }
+
+      });
+
+
+
+    // ----------------------------
+    // Get Exercise Log
+    // ----------------------------
+
+    document
+      .getElementById("logForm")
+      .addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+
+        const userId =
+          document.getElementById("logUserId").value;
+
+        const from =
+          document.getElementById("from").value;
+
+        const to =
+          document.getElementById("to").value;
+
+        const limit =
+          document.getElementById("limit").value;
+
+
+        const params =
+          new URLSearchParams();
+
+
+        if (from) {
+          params.append("from", from);
+        }
+
+        if (to) {
+          params.append("to", to);
+        }
+
+        if (limit) {
+          params.append("limit", limit);
+        }
+
+
+        let url =
+          `/api/users/${userId}/logs`;
+
+
+        if (params.toString()) {
+
+          url += "?" +
+            params.toString();
+
+        }
+
+
+        try {
+
+          const result =
+            await fetch(url);
+
+
+          const data =
+            await result.json();
+
+          showResponse(data);
+
+        } catch (error) {
+
+          showResponse({
+            error: "Unable to connect to API"
+          });
+
+        }
+
+      });
+
+  </script>
+
+</body>
+
+</html>
